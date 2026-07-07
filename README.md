@@ -1,6 +1,13 @@
 # Backtesting Engine
 
+![tests](https://github.com/daiji-liu23/backtesting-engine/actions/workflows/tests.yml/badge.svg)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+
 Run a trading strategy against historical price data and get back Sharpe ratio, max drawdown, win rate, and an equity curve chart.
+
+![Equity curve example](docs/equity_example.png)
+
+*AAPL, 2018-2024, `ma_crossover` strategy (fast=20, slow=50, $100k starting capital) — top: equity curve, bottom: drawdown from peak.*
 
 ## Install
 
@@ -55,3 +62,7 @@ The suite (`tests/`) only covers the deterministic logic — `metrics.py`, `engi
 - `Backtest.run()` already shifts the position by one bar before applying it to returns (`signals.shift(1)`), so the strategy can't act on a signal until the bar after it fires — this avoids lookahead bias. Don't recompute or re-shift this elsewhere.
 - Price data uses `auto_adjust=True`, so `Close` is already split/dividend-adjusted. Don't mix it with raw close values.
 - `Backtest.run()` currently has no commission/slippage modeling — returns are gross, not net of trading costs.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
